@@ -35,6 +35,7 @@ main() {
         verify_age
         verify_git_repository
         verify_cloudflare
+        verify_proxmox_hosts
         verify_success
     else
         # generate sops configuration file
@@ -64,10 +65,15 @@ main() {
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/networking/cloudflare-ddns/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/networking/external-dns/secret.sops.yaml"
         # generate terraform secrets
-        envsubst < "${PROJECT_DIR}/tmpl/terraform/secret.sops.yaml" \
+        envsubst < "${PROJECT_DIR}/tmpl/terraform/cloudflare/secret.sops.yaml" \
             > "${PROJECT_DIR}/provision/terraform/cloudflare/secret.sops.yaml"
         # encrypt terraform secrets
         sops --encrypt --in-place "${PROJECT_DIR}/provision/terraform/cloudflare/secret.sops.yaml"
+         # generate proxmox secrets
+        envsubst < "${PROJECT_DIR}/tmpl/terraform/proxmox/secret.sops.yaml" \
+            > "${PROJECT_DIR}/provision/terraform/proxmox/secret.sops.yaml"
+        # encrypt proxmox secrets
+        sops --encrypt --in-place "${PROJECT_DIR}/provision/terraform/proxmox/secret.sops.yaml"
         # generate ansible settings
         envsubst < "${PROJECT_DIR}/tmpl/ansible/kube-vip.yml" \
             > "${PROJECT_DIR}/provision/ansible/inventory/group_vars/kubernetes/kube-vip.yml"
@@ -338,6 +344,42 @@ verify_cloudflare() {
         _log "ERROR" "Unable to get Cloudflare Account and Zone information ${errors}"
         exit 1
     fi
+}
+
+verify_promox_hosts() {
+    # is this needed?
+	# local node_id=
+	local node_name=
+	local api_url=
+	local api_id=
+	local api_secret=
+    local errors=
+
+    # Reads names from BOOTSRTAP_PROXMOX_NODE_NAMES=foo,bar
+	for node_name in ${BOOTSRTAP_PROXMOX_NODE_NAMES//,/}; do
+		# is this needed?
+        # node_id=$(echo "${var}" | awk -F"_" '{print$5}')
+		api_url="BOOSTRAP_PROXMOX_API_URL"
+		api_id="BOOSTRAP_PROXMOX_API_ID"
+		api_secret="BOOSTRAP_PROXMOX_API_SECRET"
+		# _has_envar "${node_id}"
+		_has_envar "${node_name}"
+		_has_envar "${api_url}"
+		_has_envar "${api_id}"
+		_has_envar "${api_secret}"
+
+		# Test proxmox auth credentials
+		# curl  --insecure --cookie "$(<cookie)" https://$APINODE:8006/api2/json/nodes/$TARGETNODE/status | jq '.'
+    	proxmox_api_connection=$(curl  --insecure --cookie "$(<cookie)" https://$api_url/api2/json/nodes/$node_name/status)
+		
+		if [[ "$(echo "${proxmox_api_connection}" | jq ".")" == "true" ]]; then
+			_log "INFO" "Connection to proxmox nodes OK"
+		else
+            errors=$(echo "${proxmox_api_connection}" | jq -c ".errors")
+		    _log "ERROR" "Unable to connect to ${node_name}: ${errors}"
+		    exit 1
+		fi
+	done	
 }
 
 verify_ansible_hosts() {
