@@ -17,9 +17,11 @@ includes:
   ansible: .taskfiles/AnsibleTasks.yml
   cluster: .taskfiles/ClusterTasks.yml
   precommit: .taskfiles/PrecommitTasks.yml
-  terraform: .taskfiles/TerraformTasks.yml
+  terraform-cloudflare: .taskfiles/TerraformCloudflareTasks.yml
+  terraform-proxmox: .taskfiles/TerraformProxmoxTasks.yml
   sops: .taskfiles/SopsTasks.yml
-
+  
+ 
 tasks:
 
   init:
@@ -51,7 +53,7 @@ tasks:
         tflint
         yamllint
         yq
-
+  
   verify:
     desc: Verify env settings
     cmds:
@@ -61,3 +63,10 @@ tasks:
     desc: Configure repository from env settings
     cmds:
       - ./configure
+
+  verify-proxmox:
+    desc: Verify proxmox settings
+    cmds:
+      - ./configure --verify-proxmox
+  
+  
