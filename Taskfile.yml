@@ -68,5 +68,3 @@ tasks:
     desc: Verify proxmox settings
     cmds:
       - ./configure --verify-proxmox
-
-
