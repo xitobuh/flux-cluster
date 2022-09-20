@@ -39,8 +39,9 @@ main() {
         verify_cloudflare
         verify_success
     elif [[ "${verify_proxmox}" == 1 ]]; then
-    	verify_proxmox_hosts   
-	verify_proxmox_vms
+        verify_proxmox_hosts
+        verify_proxmox_vms
+        generate_proxmox_secrets
     else
         # generate sops configuration file
         envsubst < "${PROJECT_DIR}/tmpl/.sops.yaml" \
@@ -73,14 +74,7 @@ main() {
             > "${PROJECT_DIR}/provision/terraform/cloudflare/secret.sops.yaml"
         # encrypt terraform secrets
         sops --encrypt --in-place "${PROJECT_DIR}/provision/terraform/cloudflare/secret.sops.yaml"
-	if [[ "${BOOTSTRAP_PROXMOX_ENABLED}" == "true" ]]; then
-            # generate proxmox secrets
-            envsubst < "${PROJECT_DIR}/tmpl/terraform/proxmox/secret.sops.yaml" \
-                > "${PROJECT_DIR}/provision/terraform/proxmox/secret.sops.yaml"
-            # encrypt proxmox secrets
-            sops --encrypt --in-place "${PROJECT_DIR}/provision/terraform/proxmox/secret.sops.yaml"
-        fi
-	# generate ansible settings
+    # generate ansible settings
         envsubst < "${PROJECT_DIR}/tmpl/ansible/kube-vip.yml" \
             > "${PROJECT_DIR}/provision/ansible/inventory/group_vars/kubernetes/kube-vip.yml"
         # include kube-vip if enabled
@@ -113,7 +107,7 @@ parse_command_line() {
             --verify)
                 verify=1
                 ;;
-	    --verify-proxmox)
+        --verify-proxmox)
                 verify_proxmox=1
                 ;;
             *)
@@ -358,44 +352,64 @@ verify_cloudflare() {
     fi
 }
 
-verify_promox_hosts() {
-    # is this needed?
-	# local node_id=
-	local api_url="BOOSTRAP_PROXMOX_API_URL"
-	local api_id="BOOSTRAP_PROXMOX_API_ID"
-	local api_secret="BOOSTRAP_PROXMOX_API_SECRET"
-    	local errors=
-	_has_envar "${api_url}"
-	_has_envar "${api_id}"
-	_has_envar "${api_secret}"
+verify_proxmox_hosts() {
 
-    	# Reads names from BOOTSRTAP_PROXMOX_NODE_NAMES=foo,bar
-	for node_name in ${BOOTSRTAP_PROXMOX_NODE_NAMES//,/}; do
-		# is this needed?
-        	# node_id=$(echo "${var}" | awk -F"_" '{print$5}')
-		# _has_envar "${node_id}"
-		_has_envar "${node_name}"
+    local errors=
+    _has_envar "BOOTSTRAP_PROXMOX_API_URL"
+    _has_envar "BOOTSTRAP_PROXMOX_API_ID"
+    _has_envar "BOOTSTRAP_PROXMOX_API_SECRET"
+    _has_envar "BOOTSTRAP_PROXMOX_NODE_NAMES"
 
-		# Test proxmox auth credentials
-		# curl  --insecure --cookie "$(<cookie)" https://$APINODE:8006/api2/json/nodes/$TARGETNODE/status | jq '.'
-    		proxmox_api_connection=$(curl  --insecure --cookie "$(<cookie)" https://$api_url/api2/json/nodes/$node_name/status \
-			-H "Authorization: PVEAPIToken=${api_id}=${api_secret}"		
-		)
-		
-		if [[ "$(echo "${proxmox_api_connection}" | jq ".")" == "true" ]]; then
-			_log "INFO" "Connection to proxmox nodes OK"
-		else
-            		errors=$(echo "${proxmox_api_connection}" | jq -c ".errors")
-		   	_log "ERROR" "Unable to connect to ${node_name}: ${errors}"
-		    	exit 1
-		fi
-	done	
+        # Reads names from BOOTSRTAP_PROXMOX_NODE_NAMES=foo,bar
+    for node_name in ${BOOTSTRAP_PROXMOX_NODE_NAMES//,/ }; do
+        api_url="${BOOTSTRAP_PROXMOX_API_URL}/nodes/${node_name}/status"
+        # Test proxmox auth credentials
+        # curl  --insecure --cookie "$(<cookie)" https://$APINODE:8006/api2/json/nodes/$TARGETNODE/status | jq '.'
+        proxmox_api_connection=$(curl -s --insecure $api_url \
+            -H "Authorization: PVEAPIToken=${BOOTSTRAP_PROXMOX_API_ID}=${BOOTSTRAP_PROXMOX_API_SECRET}"
+        )
+        connected=$(echo "${proxmox_api_connection}" | jq ".data.pveversion")
+        if [[ $connected ]]; then
+            _log "INFO" "Connection to ${node_name} OK"
+        else
+            _log "ERROR" "Unable to connect to ${node_name}"
+            exit 1
+        fi
+    done
 }
 
-verify_promox_vms() {
-	local vm_="BOOSTRAP_PROXMOX_VM_"
-    	local errors=
-	_has_envar "${vm_}"
+verify_proxmox_vms() {
+    local errors=
+    _has_envar "BOOTSTRAP_PROXMOX_VMS"
+    _has_envar "BOOTSTRAP_PROXMOX_VM_START_ID"
+    _has_envar "BOOTSTRAP_PROXMOX_VM_TEMPLATE_NAME"
+    _has_envar "BOOTSTRAP_PROXMOX_VM_CORES"
+    _has_envar "BOOTSTRAP_PROXMOX_VM_SOCKETS"
+    _has_envar "BOOTSTRAP_PROXMOX_VM_MEMORY"
+    _has_envar "BOOTSTRAP_PROXMOX_VM_DISK_SIZE"
+    _has_envar "BOOTSTRAP_PROXMOX_VM_STORAGE"
+    _has_envar "BOOTSTRAP_PROXMOX_VM_IP_START"
+    _has_envar "BOOTSTRAP_PROXMOX_VM_IP_GW"
+    _has_envar "BOOTSTRAP_PROXMOX_VM_IP_DNS"
+    _has_envar "BOOTSTRAP_PROXMOX_VM_SEARCHDOMAIN"
+    _has_envar "BOOTSTRAP_PROXMOX_VM_USER"
+    _has_envar "BOOTSTRAP_PROXMOX_VM_PASSWORD"
+    _has_envar "BOOTSTRAP_PROXMOX_VM_SSH_PUBKEY"
+
+    vm_ip=$(echo "${BOOTSTRAP_PROXMOX_VM_IP_START}" | cut -d/ -f1)
+
+    _has_valid_ip "${vm_ip}" "BOOTSTRAP_PROXMOX_VM_IP_START"
+    _has_valid_ip "${BOOTSTRAP_PROXMOX_VM_IP_GW}" "BOOTSTRAP_PROXMOX_VM_IP_GW"
+    _has_valid_ip "${BOOTSTRAP_PROXMOX_VM_IP_GW}" "BOOTSTRAP_PROXMOX_VM_IP_DNS"
+
+}
+
+generate_proxmox_secrets() {
+    # generate proxmox secrets
+    envsubst < "${PROJECT_DIR}/tmpl/terraform/proxmox/secret.sops.yaml" \
+        > "${PROJECT_DIR}/provision/terraform/proxmox/secret.sops.yaml"
+    # encrypt proxmox secrets
+    sops --encrypt --verbose --in-place "${PROJECT_DIR}/provision/terraform/proxmox/secret.sops.yaml"
 }
 
 verify_ansible_hosts() {
@@ -444,12 +458,12 @@ verify_ansible_hosts() {
         if ssh -q -o BatchMode=yes -o ConnectTimeout=5 "${!node_username}"@"${!var}" "true"; then
             _log "INFO" "SSH into host '${!var}' with username '${!node_username}' was successfull"
         else
-	    if [[ "${BOOTSTRAP_PROXMOX_ENABLED}" == "true" ]]; then
-            	_log "ERROR" "SSH into host '${!var}' with username '${!node_username}'was NOT successful, has VMs been created in proxmox? See 'task proxmox:' and 'task verify-proxmox'"
-	    else
-	    	_log "ERROR" "SSH into host '${!var}' with username '${!node_username}'was NOT successful, did you copy over your SSH key?"
-	    fi
-	    exit 1
+        if [[ "${BOOTSTRAP_PROXMOX_ENABLED}" == "true" ]]; then
+                _log "ERROR" "SSH into host '${!var}' with username '${!node_username}'was NOT successful, has VMs been created in proxmox? See 'task proxmox:' and 'task verify-proxmox'"
+        else
+            _log "ERROR" "SSH into host '${!var}' with username '${!node_username}'was NOT successful, did you copy over your SSH key?"
+        fi
+        exit 1
         fi
     done
 }

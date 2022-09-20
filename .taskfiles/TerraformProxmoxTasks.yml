@@ -20,7 +20,7 @@ tasks:
     dir: provision/terraform/proxmox
     cmds:
       - terraform apply {{.CLI_ARGS}}
-      
+
   destroy:
     desc: Destroy proxmox VMs
     dir: provision/terraform/proxmox

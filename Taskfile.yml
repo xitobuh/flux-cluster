@@ -20,8 +20,8 @@ includes:
   terraform-cloudflare: .taskfiles/TerraformCloudflareTasks.yml
   terraform-proxmox: .taskfiles/TerraformProxmoxTasks.yml
   sops: .taskfiles/SopsTasks.yml
-  
- 
+
+
 tasks:
 
   init:
@@ -53,7 +53,7 @@ tasks:
         tflint
         yamllint
         yq
-  
+
   verify:
     desc: Verify env settings
     cmds:
@@ -68,5 +68,5 @@ tasks:
     desc: Verify proxmox settings
     cmds:
       - ./configure --verify-proxmox
-  
-  
+
+
