@@ -7,3 +7,5 @@ resources:
   - kube-system
   - networking
   - system-upgrade
+  - authentication
+  - databases

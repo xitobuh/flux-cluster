@@ -64,11 +64,27 @@ main() {
             > "${PROJECT_DIR}/cluster/apps/networking/cloudflare-ddns/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/cluster/external-dns-secret.sops.yaml" \
             > "${PROJECT_DIR}/cluster/apps/networking/external-dns/secret.sops.yaml"
+        envsubst < "${PROJECT_DIR}/tmpl/cluster/apps/authentication/authelia.sops.yaml" \
+            > "${PROJECT_DIR}/cluster/apps/authentication/authelia/secret.sops.yaml"
+        envsubst < "${PROJECT_DIR}/tmpl/cluster/apps/authentication/glauth-server.sops.toml" \
+            > "${PROJECT_DIR}/cluster/apps/authentication/glauth/config/server.sops.toml"
+        envsubst < "${PROJECT_DIR}/tmpl/cluster/apps/authentication/glauth-groups.sops.toml" \
+            > "${PROJECT_DIR}/cluster/apps/authentication/glauth/config/groups.sops.toml"
+        envsubst < "${PROJECT_DIR}/tmpl/cluster/apps/authentication/glauth-users.sops.toml" \
+            > "${PROJECT_DIR}/cluster/apps/authentication/glauth/config/users.sops.toml"
+        envsubst < "${PROJECT_DIR}/tmpl/cluster/apps/databases/redis.sops.yaml" \
+            > "${PROJECT_DIR}/cluster/apps/databases/redis/secret.sops.yaml"
+
         # encrypt cluster secrets
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/config/cluster-secrets.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/core/cluster-issuers/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/networking/cloudflare-ddns/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/networking/external-dns/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/authentication/authelia/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/authentication/glauth/config/server.sops.toml"
+        sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/authentication/glauth/config/groups.sops.toml"
+        sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/authentication/glauth/config/users.sops.toml"
+        sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/databases/redis/secret.sops.yaml"
         # generate terraform secrets
         envsubst < "${PROJECT_DIR}/tmpl/terraform/cloudflare/secret.sops.yaml" \
             > "${PROJECT_DIR}/provision/terraform/cloudflare/secret.sops.yaml"

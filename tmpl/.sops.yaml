@@ -10,3 +10,7 @@ creation_rules:
     key_groups:
       - age:
           - ${BOOTSTRAP_AGE_PUBLIC_KEY}
+  - path_regex: cluster/.*\.sops\.toml
+    key_groups:
+      - age:
+          - ${BOOTSTRAP_AGE_PUBLIC_KEY}

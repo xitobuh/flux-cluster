@@ -1,0 +1,26 @@
+[[users]]
+    name = "svc"
+    uidnumber = 5000
+    primarygroup = 6500
+    passbcrypt = "243261243132243542554b44744b4b534531333941694e355a687033654c6b62504f6879382f374566446c396742682e6258684b6f4e6b5874393671"
+    [[users.capabilities]]
+        action = "search"
+        object = "*"
+[[users]]
+    name = "admin"
+    mail = ""
+    givenname = "admin"
+    sn = "Buhl"
+    uidnumber = 5001
+    primarygroup = 6502
+    othergroups = [ 6501 ]
+    passbcrypt = ${BOOSTRAP_USER0_PASSWORD}
+[[users]]
+    name = ${BOOSTRAP_USER0_NAME}
+    mail = ${BOOSTRAP_USER0_MAIL}
+    givenname = ${BOOSTRAP_USER0_GIVEN_NAME}
+    sn = "Buhl"
+    uidnumber = 5002
+    primarygroup = 6502
+    passbcrypt = ${BOOSTRAP_USER0_PASSWORD}
+    sshkeys = [ ${BOOSTRAP_USER0_SSH_KEY} ]

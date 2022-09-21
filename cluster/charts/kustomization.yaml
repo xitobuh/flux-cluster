@@ -12,4 +12,5 @@ resources:
   - k8s-gateway-charts.yaml
   - metallb-charts.yaml
   - metrics-server-charts.yaml
+  - nextcloud-charts.yaml
   - stakater-charts.yaml
