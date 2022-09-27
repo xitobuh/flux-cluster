@@ -34,7 +34,7 @@
         - name: restart systemd-resolved
           ansible.builtin.systemd:
             state: restarted
-            daemon_reload: yes
+            daemon_reload: true
             name: systemd-resolved
     - name: Packages
       block:
@@ -73,6 +73,20 @@
             user: "{{ ansible_user }}"
             key: "{{ item }}"
           loop: "{{ public_ssh_keys | default([]) }}"
+    - name: Storage Configuration
+      block:
+        - name: Create mountpoints
+          ansible.builtin.file:
+            path: /mnt/8tb
+            state: directory
+            mode: '0755'
+        - name: Mount share
+          ansible.posix.mount:
+            path: /mnt/8tb
+            src: 192.168.210.1:/mnt/8tb
+            fstype: nfs
+            state: mounted
+            opts: rw,sync,hard
     - name: System Configuration (1)
       block:
         # Removed since not used in fedora cloud image

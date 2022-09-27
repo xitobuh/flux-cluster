@@ -14,4 +14,5 @@ resources:
   - metallb-charts.yaml
   - metrics-server-charts.yaml
   - nextcloud-charts.yaml
+  - node-feature-discovery-charts.yaml
   - stakater-charts.yaml
