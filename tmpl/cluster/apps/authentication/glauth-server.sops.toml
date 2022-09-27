@@ -10,4 +10,4 @@ debug = true
     listen = "0.0.0.0:5555"
 [backend]
     datastore = "config"
-    baseDN = ${BOOTSTRAP_GLAUTH_BASE_DN}
+    baseDN = "${BOOTSTRAP_GLAUTH_BASE_DN}"

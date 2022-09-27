@@ -10,17 +10,17 @@
     name = "admin"
     mail = ""
     givenname = "admin"
-    sn = "Buhl"
+    sn = ""
     uidnumber = 5001
     primarygroup = 6502
     othergroups = [ 6501 ]
-    passbcrypt = ${BOOSTRAP_USER0_PASSWORD}
+    passbcrypt = "${BOOTSTRAP_GLAUTH_USER0_PASSWORD}"
 [[users]]
-    name = ${BOOSTRAP_USER0_NAME}
-    mail = ${BOOSTRAP_USER0_MAIL}
-    givenname = ${BOOSTRAP_USER0_GIVEN_NAME}
-    sn = "Buhl"
+    name = "${BOOTSTRAP_GLAUTH_USER1_NAME}"
+    mail = "${BOOTSTRAP_GLAUTH_USER1_MAIL}"
+    givenname = "${BOOTSTRAP_GLAUTH_USER1_GIVEN_NAME}"
+    sn = ""
     uidnumber = 5002
     primarygroup = 6502
-    passbcrypt = ${BOOSTRAP_USER0_PASSWORD}
-    sshkeys = [ ${BOOSTRAP_USER0_SSH_KEY} ]
+    passbcrypt = "${BOOTSTRAP_GLAUTH_USER1_PASSWORD}"
+    sshkeys = [ "${BOOTSTRAP_GLAUTH_USER1_SSH_KEY}" ]
