@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: metrics-server
-  namespace: kube-system
+  namespace: default
 spec:
   interval: 15m
   chart:
@@ -14,7 +14,6 @@ spec:
         kind: HelmRepository
         name: metrics-server
         namespace: flux-system
-      interval: 15m
   install:
     createNamespace: true
     remediation:
@@ -28,3 +27,7 @@ spec:
       - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
       - --kubelet-use-node-status-port
       - --metric-resolution=15s
+    metrics:
+      enabled: true
+    serviceMonitor:
+      enabled: true
