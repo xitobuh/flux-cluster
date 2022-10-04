@@ -1,20 +1,9 @@
-{
-    "data": "ENC[AES256_GCM,data:Ol2g5vxCG/pFJfD5bbeLbR60sSSm8vHTfQ+EswOqwuxzBWXxQl7kKlfhwpzQ9jVUpjtic2YPOZMIOJz1QmFfLhCvRbQ/asVGYOOyQyq1lmfKa9ixxiYsjyQJDxbswuhfwO4mXi5cg9faFvdUoccoF1E2kgUYARWJcrPHDwXXnmfV1R86kXEllOh+yGEmc7afRU3MSgGgHEzXf5576Q==,iv:w6s8r/E82HJwGW9lfhZxv6dK4ssXjtd21FodplRcqU4=,tag:2Jrs4nkBMLb1iSSRHYybxg==,type:str]",
-    "sops": {
-        "kms": null,
-        "gcp_kms": null,
-        "azure_kv": null,
-        "hc_vault": null,
-        "age": [
-            {
-                "recipient": "age1dqeu2hqrml7n7zyzz4vxjhk8rjt0wm8jqennwmtvej3sd9dhcsysl5z473",
-                "enc": "-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBTcktPUVQrVUdVNFpPV0J5\nd3JmcGt3QmdEcndsdTkzUXZJUDM4aEtScURnCnZsRmlrS0wrRFV2cDhvUlZhV0x2\nZUJVZURGSmpOZEwrbXllWTIwWS9FcVUKLS0tIC9hWlhYL2oxYzZVMmcrMnV3ZUFD\nVEh6OXRMaVdWNVhvWEJIeG8zSCtOaU0KIWgsYa+HmogCpJFT6Ny9XhmeenqktBaj\nHLQaw2GwLn3nrLHOtRBK4rL/KBgM79c1funV3ZdjqkfOi3Z+4hiBHQ==\n-----END AGE ENCRYPTED FILE-----\n"
-            }
-        ],
-        "lastmodified": "2022-09-27T20:39:20Z",
-        "mac": "ENC[AES256_GCM,data:+2FlaQ6cYiv0mXiP0g2m0EcJrDhYW/SI2GDw313tSCo5vryyHb8zMb0RSbeghXN4EP7v9L/WD2KjKve0VBv07/SVAPF7Pa7zV7+MDw++tK95Zv9vFMG9GVoUJq41bmAzUt6cs79k7cQb1L16d2mKXbSoHwHM0yLvXqAn0cQU7+s=,iv:nk4O7Ai0i3LAovWzE8XCTCJkaYvEWMhdJWEx2f/sHLY=,tag:m7VhrnVT1xerrgZgKVUkew==,type:str]",
-        "pgp": null,
-        "unencrypted_suffix": "_unencrypted",
-        "version": "3.7.3"
-    }
-}
+[[groups]]
+    name = "svcaccts"
+    gidnumber = 6500
+[[groups]]
+    name = "admins"
+    gidnumber = 6501
+[[groups]]
+    name = "users"
+    gidnumber = 6502

@@ -1,20 +1,26 @@
-{
-    "data": "ENC[AES256_GCM,data:q+C/qZ8QaTVFWTYNOkk9brCWF/81IYVvPKjTsql3JRvKpy7FGE6hYocVIOS3o2OFkyKM7zSQoAsWMPrl2JGHVHfHnBt07jpYpGMlTt343PoX7KGdPOwaOJwGg/n7eGAoeGDk/M59htJvfauOkvZXl8iGVgUUbDdKirAa9D1aVLQ3pmdcitaPNEamcmF30wIMz7zcPbZr3t4ZRm3hMwtV0B2S0JcCSGOW+/k+neAylur1V8CJ5a0wKb12JqX5U0aCz9BET5ofMc9jkuoZr2L8cyAJBCY/1K3V/OKyZy4PR/do6Cc/ytXdvmoYNjgfnh0tZSrufQfz/JYn6GYkLHcmDH3UlDGP1GOH4i+pRtJvLbFob2ZUGIV9XB64lHh41k5WNakgjRYB46bJ9AY05MlEnddZsqWWuopdQPd0hpdenvwiL4i0aC85oFXL0qUuMuP+5lPdDJinpEZ4LOWFZPpZn3du6iZXY+KUGM+lYFzxjJkR+nnUcRPJkl/J3naUGeUP4gIW30SAwwhai4FFr6iuizRD6Z2cfrH8nOBQ0dYDuLnwtZaLvKKRlob5J3sslrRns07lJ4/QVlrC1A6Met7Xs1LTdeNxmX5zab2wsRVakPXuJhQooDQmClP98gTcX9O8Bvr8Ht9UtijzQOPW5i4EwE/DJkW1LFmiCL1K6VcIpngQitcOpty4ouOT64ZC+Y7ok1TxQ9skYPfSzMnlMTXuxzVaTVVg9h7uBLcjt1/z0os/a8+cqEMvqLqtEIyXJL6bvcXFOl+5AT4+fCEXslQya2/DRaRNdR4MrYZlJoH3xls5FJxRKEpdEt1kk9EOJmf+2kI1wRwvpAGZ5BnsL250jxnLR5oH3w7F/ytTMO/JOyuiFq3F8WaL/8l2L0Sd7iZDoxySBAKmyqapsUtow9RDjySyt5VCiinN/tbaVolnvcsjvIxqQbQ5SB7+UVBSMAtjhcv65qmt1EkVv8ydJmjh7hl6Rs2A85tFkBtqtM7v1aQd5EQnw2qWF9jZpbQrC121b4VO0vlMpslRN8+4WMuqq3dNuPzoslbvJkttNNNDjZCSpAcCiTXbefYuOO8R5/HoKebTpF8GTxCJuGjYWNuScnoEE9jD0dvLJUmSypY1zDq9NlnhlNJvsOFnLCsr2syLJUT5aWbwCRDJddLnTPZEeV0GrzMtUc000tPbMEbsUAwjj3ktUIO2mp3FFDz5aub+EsKoWmhAf8q3E6c+m+1Onopya/NvYBWFHeG+gUVpSXsWT6kSJhKWMt7z3yRfbgOp3hwCULVm2U6eFOAMabIjMNd0oQ8=,iv:vQ3Zb2qMAKXqBjYWgWHNSzWBgRdtB4Ea/C0+ktR4Wxc=,tag:WnYiQkupY8OiBtAfdL8DqQ==,type:str]",
-    "sops": {
-        "kms": null,
-        "gcp_kms": null,
-        "azure_kv": null,
-        "hc_vault": null,
-        "age": [
-            {
-                "recipient": "age1dqeu2hqrml7n7zyzz4vxjhk8rjt0wm8jqennwmtvej3sd9dhcsysl5z473",
-                "enc": "-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBrZWdQRFJsR3ZIckhmRktn\nMWF3OUtwalJvSkw4eW5YUUxTWW50QlNWbkJVCi9KQ1BlaVluQVdzSlZmd0srMm9W\nS3QrOVFkWGpWR2NpRGZZNkxldnBDZUkKLS0tIFBQaDZOWUFKeGhqUlVURnM1cXBV\na2JKSEo0VzQxeGVUenNjNWh2bkFqUkUKlrI4fLtB4UZqDk8z1L2jm7rB2tCidmIH\nd1jvi2wVgzouTvtapKy+1bNVw43I7U7ivoPJMX3mRamWEt7S6gnEqg==\n-----END AGE ENCRYPTED FILE-----\n"
-            }
-        ],
-        "lastmodified": "2022-09-27T20:39:20Z",
-        "mac": "ENC[AES256_GCM,data:gU72KofI/1tnGyrI0RrTQaskoxq6pcLZh9S4nAxl7BdWoc7BbrjAIQaHBjnvOs5JfYtUm/5R8W6o7O6UiwqmFskh0r8NOa9CY3gMufle0jLree9aEHCr0RlO0Gz/bVcs43jq26ooObjTg8HU0pWajUUSaeSJR9Ub6Cm1iLGLq2U=,iv:epm3JWWx2A+mQyZvIiuxfW6fqA+FouSFe9as09Di9KQ=,tag:1PrCXSs2hArcKyhHzp+3Qg==,type:str]",
-        "pgp": null,
-        "unencrypted_suffix": "_unencrypted",
-        "version": "3.7.3"
-    }
-}
+[[users]]
+    name = "svc"
+    uidnumber = 5000
+    primarygroup = 6500
+    passbcrypt = "243261243132243542554b44744b4b534531333941694e355a687033654c6b62504f6879382f374566446c396742682e6258684b6f4e6b5874393671"
+    [[users.capabilities]]
+        action = "search"
+        object = "*"
+[[users]]
+    name = "admin"
+    mail = ""
+    givenname = "admin"
+    sn = ""
+    uidnumber = 5001
+    primarygroup = 6502
+    othergroups = [ 6501 ]
+    passbcrypt = "24326124313224544b4238763330354d6b634c6a4165587850764e3475673431637377456c4b4f6c424c65474d6d466e672e4631375242696b2f3547"
+[[users]]
+    name = "jonas"
+    mail = "jonas.hockert92@gmail.com"
+    givenname = "Jonas"
+    sn = ""
+    uidnumber = 5002
+    primarygroup = 6502
+    passbcrypt = "24326124313224544c4b48743446476342366a5775794663566b6d564f437565366f42386c37333272446e636c5778734f676f355359706a4f6c3271"
+    sshkeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP651eRAAzjs9aARE3B28IXAnu53ZaZjWJ65fyUfnL/n jonas@fedora" ]

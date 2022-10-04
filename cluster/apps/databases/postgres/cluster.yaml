@@ -13,3 +13,5 @@ spec:
     name: postgres-superuser
   monitoring:
     enablePodMonitor: true
+  storage:
+    size: 100Mi

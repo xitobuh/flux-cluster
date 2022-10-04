@@ -1,20 +1,13 @@
-{
-    "data": "ENC[AES256_GCM,data:wbiQPLF2mKxi5iF3Utegp4sYXE76vNqTjBRtErmBNcIOuyXgRR4pm6pGCKgzgGpxzvMSOc9MB79Al23DJ5IiTyJ2mvQrr9NvdZTRVoV30hyeSV8XPR7v8g/pLmqEh3pFQwtLZzqEO0A4PNQwqgR0j3UJk7FiHA+4OTq9lPArWbsERYM8+w8AM21SiHvfNm8mtZuhOe7zffmoYzrD/xAmHi/tn0FDGuSixsOm0ONC8rwF4ypaatfOD4BFqhoMVZ9J03s/7ks52q/TYD5tNDk3bzcuCREPqH5dygCHNxOO0BAINNDp2FKC,iv:QRH198car20F7JNlXDn69ZunlhS5xmYB9IqV+FX/Cu4=,tag:pokqjhQVbogTVdGS9gjN1A==,type:str]",
-    "sops": {
-        "kms": null,
-        "gcp_kms": null,
-        "azure_kv": null,
-        "hc_vault": null,
-        "age": [
-            {
-                "recipient": "age1dqeu2hqrml7n7zyzz4vxjhk8rjt0wm8jqennwmtvej3sd9dhcsysl5z473",
-                "enc": "-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBCQlovSUpKK1dwS2dVT2ty\nSHhMekgvc2VNK21HSXh1enB3ZFJyR0c1dW1RCmZIb05CNDN4Ym5uU29GRnVzdVZN\nbmFGRExycFB4c3VFak5GcHRYVnlPdGsKLS0tIFJONC9BVCtIT0I3QnNucHBWQ1Ar\nTGRVTFMzWC81NHVDaEI3SWdwRzZIQjgKukqSr+2fI66VqkGECpGrFyYchgJZ++xH\nUKNScs+5UYStYewSzIZVJ/K2H6RoSvLJtgDyltQT2K+p5kFA2aKfug==\n-----END AGE ENCRYPTED FILE-----\n"
-            }
-        ],
-        "lastmodified": "2022-09-27T20:39:20Z",
-        "mac": "ENC[AES256_GCM,data:Qn6dfZk9I06YcycigGe1mvuClLpXrMyCZCrsMSPXtwWdqjuIqe8VdwWTDACPxuncFkVzr9xvSeymxI+uOEhsMjwzTTa1/s+Q6rsmi/mQDbzzZ/zThw+gRfyVDf4lFXHL5h5eCwzIJVDSXhTjnXbR1ZxN5SUaLIBPXjyGI2K9WSQ=,iv:fubRSNn4flluM0m+HdxV/Z5rDmb+Kt4VEUM+8+vnxUE=,tag:qUTgXinnE28X30YdEUlUqA==,type:str]",
-        "pgp": null,
-        "unencrypted_suffix": "_unencrypted",
-        "version": "3.7.3"
-    }
-}
+debug = true
+[ldap]
+    enabled = true
+    listen = "0.0.0.0:389"
+[ldaps]
+    enabled = false
+[api]
+    enabled = true
+    tls = false
+    listen = "0.0.0.0:5555"
+[backend]
+    datastore = "config"
+    baseDN = "dc=jhockert,dc=se"
