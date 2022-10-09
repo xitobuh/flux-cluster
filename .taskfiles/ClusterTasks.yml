@@ -81,6 +81,7 @@ tasks:
       - task: certificates
       - task: ingresses
       - task: pods
+
   hr-restart:
     desc: Restart all failed Helm Releases
     cmds:
