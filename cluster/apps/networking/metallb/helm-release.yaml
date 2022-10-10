@@ -21,10 +21,7 @@ spec:
   upgrade:
     remediation:
       retries: 5
-  values:
-    configInline:
-      address-pools:
-        - name: default
-          protocol: layer2
-          addresses:
-            - "${METALLB_LB_RANGE}"
+  valuesFrom:
+    - kind: ConfigMap
+      name: metallb-helm-chart-value-overrides
+      valuesKey: values.yaml # This is the default, but best to be explicit for clarity
