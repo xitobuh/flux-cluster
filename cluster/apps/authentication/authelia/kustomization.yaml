@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: default
 resources:
   - secret.sops.yaml
+  - service-monitor.yaml
   - helm-release.yaml
 patchesStrategicMerge:
   - patches/env.yaml

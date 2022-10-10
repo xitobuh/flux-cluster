@@ -16,3 +16,4 @@ resources:
   - nextcloud-charts.yaml
   - node-feature-discovery-charts.yaml
   - stakater-charts.yaml
+  - prometheus-community-charts.yaml
