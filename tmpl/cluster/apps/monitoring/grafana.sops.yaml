@@ -1,0 +1,18 @@
+# yamllint disable
+apiVersion: v1
+kind: Secret
+metadata:
+    name: grafana-admin
+    namespace: default
+stringData:
+    admin-user: ${BOOTSTRAP_GRAFANA_ADMIN_USER}
+    admin-password: ${BOOTSTRAP_GRAFANA_ADMIN_PASSWORD}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+    name: grafana
+    namespace: default
+stringData:
+    GF_DATABASE_USER: ${BOOTSTRAP_GRAFANA_DB_USER}
+    GF_DATABASE_PASSWORD: ${BOOTSTRAP_GRAFANA_DB_PASSWORD}

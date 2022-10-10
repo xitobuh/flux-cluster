@@ -76,6 +76,9 @@ main() {
             > "${PROJECT_DIR}/cluster/apps/databases/redis/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/cluster/apps/databases/postgres.sops.yaml" \
             > "${PROJECT_DIR}/cluster/apps/databases/postgres/secret.sops.yaml"
+        envsubst < "${PROJECT_DIR}/tmpl/cluster/apps/monitoring/grafana.sops.yaml" \
+            > "${PROJECT_DIR}/cluster/apps/monitoring/grafana/secret.sops.yaml"
+
 
         # encrypt cluster secrets
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/config/cluster-secrets.sops.yaml"
@@ -88,6 +91,7 @@ main() {
         # sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/authentication/glauth/config/users.sops.toml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/databases/redis/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/databases/postgres/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/monitoring/grafana/secret.sops.yaml"
         # generate terraform secrets
         envsubst < "${PROJECT_DIR}/tmpl/terraform/cloudflare/secret.sops.yaml" \
             > "${PROJECT_DIR}/provision/terraform/cloudflare/secret.sops.yaml"
