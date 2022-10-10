@@ -22,8 +22,7 @@ spec:
     remediation:
       retries: 5
   values:
-    address-pools:
-      - name: default
-        protocol: layer2
-        addresses:
-          - "${METALLB_LB_RANGE}"
+    psp:
+      create: false
+    crds:
+      enabled: false
