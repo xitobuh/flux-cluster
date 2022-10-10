@@ -21,7 +21,9 @@ spec:
   upgrade:
     remediation:
       retries: 5
-  valuesFrom:
-    - kind: ConfigMap
-      name: metallb-config
-      valuesKey: config # This is the default, but best to be explicit for clarity
+  values:
+    address-pools:
+      - name: default
+        protocol: layer2
+        addresses:
+          - "${METALLB_LB_RANGE}"
