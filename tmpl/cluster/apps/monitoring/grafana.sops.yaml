@@ -26,3 +26,12 @@ metadata:
 stringData:
     admin-user: ${BOOTSTRAP_GRAFANA_ADMIN_USER}
     admin-password: ${BOOTSTRAP_GRAFANA_ADMIN_PASSWORD}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+    name: grafana-test
+    namespace: default
+stringData:
+    test-user: ${BOOTSTRAP_GRAFANA_TEST_USER}
+    test-password: ${BOOTSTRAP_GRAFANA_TEST_PASSWORD}
