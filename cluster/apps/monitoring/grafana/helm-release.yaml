@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: grafana
-      version: 6.43.1
+      version: 6.43.4
       sourceRef:
         kind: HelmRepository
         name: grafana
@@ -34,7 +34,7 @@ spec:
       - name: grafana
     grafana.ini:
       auth:
-        signout_redirect_url: "https://auth.${SECRET_PUBLIC_DOMAIN}/logout"
+        signout_redirect_url: "https://auth.${SECRET_DOMAIN}/logout"
         oauth_auto_login: false
       auth.generic_oauth:
         enabled: true
@@ -43,9 +43,9 @@ spec:
         client_secret: "${SECRET_GRAFANA_OAUTH_CLIENT_SECRET}"
         scopes: "openid profile email groups"
         empty_scopes: false
-        auth_url: "https://auth.${SECRET_PUBLIC_DOMAIN}/api/oidc/authorization"
-        token_url: "https://auth.${SECRET_PUBLIC_DOMAIN}/api/oidc/token"
-        api_url: "https://auth.${SECRET_PUBLIC_DOMAIN}/api/oidc/userinfo"
+        auth_url: "https://auth.${SECRET_DOMAIN}/api/oidc/authorization"
+        token_url: "https://auth.${SECRET_DOMAIN}/api/oidc/token"
+        api_url: "https://auth.${SECRET_DOMAIN}/api/oidc/userinfo"
         login_attribute_path: preferred_username
         groups_attribute_path: groups
         name_attribute_path: name
@@ -127,7 +127,7 @@ spec:
       annotations:
         external-dns.home.arpa/enabled: "true"
       hosts:
-        - &host "grafana.${SECRET_PUBLIC_DOMAIN}"
+        - &host "grafana.${SECRET_DOMAIN}"
       tls:
         - hosts:
             - *host
