@@ -67,8 +67,13 @@ resource "proxmox_vm_qemu" "k3s-vm" {
 
   disk {
     type    = "scsi"
-    size    = data.sops_file.proxmox_secrets.data["proxmox_vm_disk_size"] # "4G"
-    storage = data.sops_file.proxmox_secrets.data["proxmox_vm_storage"]   # "local-lvm"
+    size    = data.sops_file.proxmox_secrets.data["proxmox_vm_disk0_size"] # "10G"
+    storage = data.sops_file.proxmox_secrets.data["proxmox_vm_storage"]    # "local-lvm"
+  }
+  disk {
+    type    = "scsi"
+    size    = data.sops_file.proxmox_secrets.data["proxmox_vm_disk1_size"] # "10G"
+    storage = data.sops_file.proxmox_secrets.data["proxmox_vm_storage"]    # "local-lvm"
   }
   # VM Network Settings
   network {
