@@ -25,9 +25,9 @@ access_control:
 
 notifier:
   smtp:
-    host: ${AUTHELIA_NOTIFIER_SMTP_HOST}
-    username: ${AUTHELIA_NOTIFIER_SMTP_USER}
-    password: ${AUTHELIA_NOTIFIER_SMTP_PASSWORD}
+    host: "${AUTHELIA_NOTIFIER_SMTP_HOST}"
+    username: "${AUTHELIA_NOTIFIER_SMTP_USER}"
+    password: "${AUTHELIA_NOTIFIER_SMTP_PASSWORD}"
 
 # identity_providers:
 #   oidc:
