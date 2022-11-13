@@ -23,12 +23,6 @@ access_control:
       networks: internal
       policy: one_factor
 
-notifier:
-  smtp:
-    host: "${AUTHELIA_NOTIFIER_SMTP_HOST}"
-    username: "${AUTHELIA_NOTIFIER_SMTP_USER}"
-    password: "${AUTHELIA_NOTIFIER_SMTP_PASSWORD}"
-
 # identity_providers:
 #   oidc:
 #     cors:
