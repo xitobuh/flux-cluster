@@ -19,3 +19,4 @@ resources:
   - node-feature-discovery-charts.yaml
   - stakater-charts.yaml
   - prometheus-community-charts.yaml
+  - rook-ceph-charts.yaml
