@@ -71,7 +71,6 @@ spec:
         medium: Memory
         sizeLimit: 1Gi
         mountPath: /dev/shm
-      storageClass: local-path
     podAnnotations:
       configmap.reloader.stakater.com/reload: *app
       secret.reloader.stakater.com/reload: *app
