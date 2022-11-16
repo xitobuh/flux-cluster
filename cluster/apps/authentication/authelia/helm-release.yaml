@@ -28,6 +28,8 @@ spec:
       namespace: default
     - name: redis
       namespace: default
+    - name: smtp-relay
+      namespace: default
   values:
     controller:
       replicas: 3
