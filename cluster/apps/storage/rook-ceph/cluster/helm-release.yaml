@@ -9,12 +9,13 @@ spec:
   chart:
     spec:
       chart: rook-ceph-cluster
-      version: v1.10.6
+      version: v1.10.5
       sourceRef:
         kind: HelmRepository
         name: rook-ceph
         namespace: flux-system
   install:
+    createNamespace: true
     remediation:
       retries: 5
   upgrade:
@@ -70,11 +71,11 @@ spec:
           - name: "k3s-5.${SECRET_DOMAIN}"
             devices:
               - name: "/dev/sdb"
-    # cephBlockPoolsVolumeSnapshotClass:
-    #   enabled: true
-    #   name: csi-rbdplugin-snapclass
-    #   annotations:
-    #     velero.io/csi-volumesnapshot-class: "true"
+    cephBlockPoolsVolumeSnapshotClass:
+      enabled: true
+      name: csi-rbdplugin-snapclass
+      annotations:
+        velero.io/csi-volumesnapshot-class: "true"
     cephBlockPools:
       - name: ceph-blockpool
         spec:
@@ -113,10 +114,10 @@ spec:
             activeStandby: true
             resources:
               requests:
-                cpu: 500m
-                memory: 250Mi
+                cpu: 1000m
+                memory: 4Gi
               limits:
-                memory: 500Mi
+                memory: 4Gi
         storageClass:
           enabled: true
           isDefault: false
@@ -149,10 +150,10 @@ spec:
             port: 80
             resources:
               requests:
-                cpu: 500m
-                memory: 250Mi
+                cpu: 1000m
+                memory: 1Gi
               limits:
-                memory: 500Mi
+                memory: 2Gi
             instances: 1
           healthCheck:
             bucket:
