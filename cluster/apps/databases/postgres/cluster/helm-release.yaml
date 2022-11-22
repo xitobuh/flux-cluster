@@ -24,6 +24,8 @@ spec:
   dependsOn:
     - name: postgres
       namespace: default
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
   values:
     resources:
       - apiVersion: postgresql.cnpg.io/v1
@@ -37,8 +39,8 @@ spec:
           instances: 3
           primaryUpdateStrategy: unsupervised
           storage:
-            size: 200Mi
-            storageClass: local-path
+            size: 5Gi
+            storageClass: ceph-block
           superuserSecret:
             name: postgres-superuser
           monitoring:

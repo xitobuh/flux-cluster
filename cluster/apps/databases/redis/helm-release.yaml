@@ -21,10 +21,13 @@ spec:
   upgrade:
     remediation:
       retries: 5
+  dependsOn:
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
   values:
-    # global:
-    #   imageRegistry: public.ecr.aws
-    #   storageClass: ceph-block
+    global:
+      imageRegistry: public.ecr.aws
+      storageClass: ceph-block
     auth:
       enabled: false
       sentinel: false
