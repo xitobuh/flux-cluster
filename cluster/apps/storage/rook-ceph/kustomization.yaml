@@ -6,4 +6,4 @@ resources:
   - cluster
   - dashboard
   - operator
-  # - rook-direct-mount
+  - rook-direct-mount
