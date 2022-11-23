@@ -71,11 +71,11 @@ spec:
           - name: "k3s-5.${SECRET_DOMAIN}"
             devices:
               - name: "/dev/sdb"
-    cephBlockPoolsVolumeSnapshotClass:
-      enabled: true
-      name: csi-rbdplugin-snapclass
-      annotations:
-        velero.io/csi-volumesnapshot-class: "true"
+    # cephBlockPoolsVolumeSnapshotClass:
+    #   enabled: true
+    #   name: csi-rbdplugin-snapclass
+    #   annotations:
+    #     velero.io/csi-volumesnapshot-class: "true"
     cephBlockPools:
       - name: ceph-blockpool
         spec:
