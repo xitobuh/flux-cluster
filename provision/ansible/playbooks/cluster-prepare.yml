@@ -13,7 +13,7 @@
     - name: Locale
       block:
         - name: Locale | Set timezone
-          timezone:
+          community.general.timezone:
             name: "{{ timezone | default('Etc/UTC') }}"
     - name: Networking
       block:
