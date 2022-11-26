@@ -62,10 +62,10 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: disk-wipe-k3s-4
+  name: disk-wipe-k3s-3
 spec:
   restartPolicy: Never
-  nodeName: k3s-4
+  nodeName: k3s-3
   containers:
     - name: disk-wipe
       image: busybox@sha256:fcd85228d7a25feb59f101ac3a955d27c80df4ad824d65f5757a954831450185
@@ -82,10 +82,10 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: disk-wipe-k3s-5
+  name: disk-wipe-k3s-4
 spec:
   restartPolicy: Never
-  nodeName: k3s-5
+  nodeName: k3s-4
   containers:
     - name: disk-wipe
       image: busybox@sha256:fcd85228d7a25feb59f101ac3a955d27c80df4ad824d65f5757a954831450185

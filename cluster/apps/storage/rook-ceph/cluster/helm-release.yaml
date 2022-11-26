@@ -65,10 +65,10 @@ spec:
           - name: "k3s-2.${SECRET_DOMAIN}"
             devices:
               - name: "/dev/sdb"
-          - name: "k3s-4.${SECRET_DOMAIN}"
+          - name: "k3s-3.${SECRET_DOMAIN}"
             devices:
               - name: "/dev/sdb"
-          - name: "k3s-5.${SECRET_DOMAIN}"
+          - name: "k3s-4.${SECRET_DOMAIN}"
             devices:
               - name: "/dev/sdb"
     # cephBlockPoolsVolumeSnapshotClass:
