@@ -132,8 +132,8 @@ spec:
         - name: loki-tmp
           emptyDir: {}
       persistence:
-        size: 10Gi
-        storageClass: ceph-block
+        size: 2Gi
+        storageClass: local-path
     monitoring:
       serviceMonitor:
         enabled: false
