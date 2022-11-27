@@ -60,6 +60,13 @@ spec:
             devices:
               - name: "/dev/sdb"
           - name: "k3s-1"
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                cpu: 200m
+                memory: 256Mi
             devices:
               - name: "/dev/sdb"
           - name: "k3s-2"
@@ -111,10 +118,11 @@ spec:
             activeStandby: true
             resources:
               requests:
-                cpu: 100m
-                memory: 250Mi
+                cpu: 10m
+                memory: 128Mi
               limits:
-                memory: 500Mi
+                cpu: 200m
+                memory: 512Mi
         storageClass:
           enabled: true
           isDefault: false
@@ -147,10 +155,11 @@ spec:
             port: 80
             resources:
               requests:
-                cpu: 100m
-                memory: 250Mi
+                cpu: 10m
+                memory: 128Mi
               limits:
-                memory: 500Mi
+                cpu: 200m
+                memory: 512Mi
             instances: 1
           healthCheck:
             bucket:
