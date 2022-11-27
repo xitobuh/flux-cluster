@@ -139,26 +139,26 @@ spec:
       enabled: true
       endpoints:
         - 192.168.210.210
+        - 192.168.210.211
         - 192.168.210.212
-        - 192.168.210.214
     kubeScheduler:
       enabled: true
       endpoints:
         - 192.168.210.210
+        - 192.168.210.211
         - 192.168.210.212
-        - 192.168.210.214
     kubeProxy:
       enabled: true
       endpoints:
         - 192.168.210.210
+        - 192.168.210.211
         - 192.168.210.212
-        - 192.168.210.214
     kubeEtcd:
       enabled: true
       endpoints:
         - 192.168.210.210
+        - 192.168.210.211
         - 192.168.210.212
-        - 192.168.210.214
       service:
         enabled: true
         port: 2381
