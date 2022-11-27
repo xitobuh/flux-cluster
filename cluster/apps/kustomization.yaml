@@ -12,5 +12,5 @@ resources:
   - databases
   - kube-tools
   - storage
-  - monitoring
+  # - monitoring
   - web-tools
