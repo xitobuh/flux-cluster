@@ -114,8 +114,8 @@ spec:
             activeStandby: true
             resources:
               requests:
-                cpu: 500m
-                memory: 500Mi
+                cpu: 100m
+                memory: 250Mi
               limits:
                 memory: 2Gi
         storageClass:
@@ -150,8 +150,8 @@ spec:
             port: 80
             resources:
               requests:
-                cpu: 500m
-                memory: 500Mi
+                cpu: 100m
+                memory: 250Mi
               limits:
                 memory: 1Gi
             instances: 1
