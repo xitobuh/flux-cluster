@@ -32,7 +32,7 @@ spec:
       dashboard:
         ingressClassName: "nginx"
         host:
-          name: &host "rook"
+          name: &host "rook.${SECRET_DOMAIN}"
           path: /
         tls:
           - hosts:
@@ -42,6 +42,96 @@ spec:
       bdev_enable_discard = true
       bdev_async_discard = true
     cephClusterSpec:
+      healthCheck:
+        livenessProbe:
+          mon:
+            probe:
+              initialDelaySeconds: 30
+              periodSeconds: 30
+              timeoutSeconds: 10
+          mgr:
+            probe:
+              initialDelaySeconds: 30
+              periodSeconds: 30
+              timeoutSeconds: 10
+          osd:
+            probe:
+              initialDelaySeconds: 30
+              periodSeconds: 30
+              timeoutSeconds: 10
+        startupProbe:
+          mon:
+            probe:
+              initialDelaySeconds: 15
+              periodSeconds: 30
+              timeoutSeconds: 10
+          mgr:
+            probe:
+              initialDelaySeconds: 15
+              periodSeconds: 30
+              timeoutSeconds: 10
+          osd:
+            probe:
+              initialDelaySeconds: 15
+              periodSeconds: 30
+              timeoutSeconds: 10
+      resources:
+        mgr:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 50m
+            memory: 256Mi
+        mon:
+          limits:
+            cpu: 1000m
+            memory: 1280Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        osd:
+          limits:
+            cpu: 500m
+            memory: 1536Mi
+          requests:
+            cpu: 250m
+            memory: 256Mi
+        prepareosd:
+          limits:
+            cpu: 1000m
+            memory: 400Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        mgr-sidecar:
+          limits:
+            cpu: 256m
+            memory: 100Mi
+          requests:
+            cpu: 50m
+            memory: 40Mi
+        crashcollector:
+          limits:
+            cpu: 100m
+            memory: 220M
+          requests:
+            cpu: 15m
+            memory: 64M
+        logcollector:
+          limits:
+            cpu: "500m"
+            memory: "1Gi"
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+        cleanup:
+          limits:
+            cpu: "500m"
+            memory: "1Gi"
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
       network:
         provider: host
       crashCollector:
