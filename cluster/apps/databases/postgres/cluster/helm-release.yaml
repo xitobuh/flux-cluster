@@ -40,7 +40,7 @@ spec:
           primaryUpdateStrategy: unsupervised
           storage:
             size: 3Gi
-            storageClass: local-path
+            storageClass: ceph-block
           superuserSecret:
             name: postgres-superuser
           monitoring:
