@@ -14,3 +14,4 @@ resources:
   - storage
   # - monitoring
   - web-tools
+  - media
