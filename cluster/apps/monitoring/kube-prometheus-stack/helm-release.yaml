@@ -100,7 +100,7 @@ spec:
         storage:
           volumeClaimTemplate:
             spec:
-              storageClassName: "local-path"
+              storageClassName: "ceph-block"
               resources:
                 requests:
                   storage: 3Gi
@@ -141,24 +141,28 @@ spec:
         - 192.168.210.210
         - 192.168.210.211
         - 192.168.210.212
+        - 192.168.210.213
     kubeScheduler:
       enabled: true
       endpoints:
         - 192.168.210.210
         - 192.168.210.211
         - 192.168.210.212
+        - 192.168.210.213
     kubeProxy:
       enabled: true
       endpoints:
         - 192.168.210.210
         - 192.168.210.211
         - 192.168.210.212
+        - 192.168.210.213
     kubeEtcd:
       enabled: true
       endpoints:
         - 192.168.210.210
         - 192.168.210.211
         - 192.168.210.212
+        - 192.168.210.213
       service:
         enabled: true
         port: 2381
@@ -190,7 +194,7 @@ spec:
           - hosts:
               - *host2
       prometheusSpec:
-        replicas: 3
+        replicas: 1
         replicaExternalLabelName: __replica__
         externalLabels:
           cluster: flux-cluster

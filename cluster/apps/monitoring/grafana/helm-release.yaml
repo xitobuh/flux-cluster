@@ -25,7 +25,7 @@ spec:
     - name: postgres
       namespace: default
   values:
-    replicas: 3
+    replicas: 1
     rbac:
       pspEnabled: false
     admin:

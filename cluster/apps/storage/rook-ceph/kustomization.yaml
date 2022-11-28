@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: rook-ceph
 resources:
   - cluster
-  # - dashboard
+  - dashboard
   - operator
-  # - rook-direct-mount
+  - rook-direct-mount

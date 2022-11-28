@@ -54,7 +54,7 @@ spec:
                 period: 24h
         common:
           path_prefix: /var/loki
-          replication_factor: 3
+          replication_factor: 2
           storage:
             s3:
               s3: null
@@ -96,7 +96,7 @@ spec:
           reporting_enabled: false
     gateway:
       enabled: true
-      replicas: 3
+      replicas: 1
       ingress:
         enabled: true
         ingressClassName: "nginx"
@@ -110,12 +110,12 @@ spec:
               - *host
             secretName: "grafana-tls"
     write:
-      replicas: 3
+      replicas: 1
       persistence:
         size: 2Gi
         storageClass: ceph-block
     read:
-      replicas: 3
+      replicas: 1
       extraVolumeMounts:
         - name: loki-rules
           mountPath: /rules/fake
