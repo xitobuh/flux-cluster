@@ -5,3 +5,4 @@ resources:
   - intel-gpu-exporter
   - intel-gpu-plugin
   - node-feature-discovery
+  - nvidia-device-plugin

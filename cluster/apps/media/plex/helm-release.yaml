@@ -22,9 +22,9 @@ spec:
     remediation:
       retries: 5
   dependsOn:
-    - name: intel-gpu-plugin
-      namespace: kube-tools
     - name: node-feature-discovery
+      namespace: kube-tools
+    - name: nvidia-device-plugin
       namespace: kube-tools
     - name: rook-ceph-cluster
       namespace: rook-ceph
@@ -93,15 +93,15 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
             - matchExpressions:
-                - key: feature.node.kubernetes.io/custom-intel-gpu
-                  operator: In
+                - key: nvidia.com/gpu
+                  operator: Exists
                   values:
                     - "true"
     resources:
       requests:
-        gpu.intel.com/i915: 1
+        nvidia.com/gpu: 1 # requesting 1 GPU
         cpu: 100m
         memory: 128Mi
       limits:
-        gpu.intel.com/i915: 1
+        nvidia.com/gpu: 1 # requesting 1 GPU
         memory: 512Mi

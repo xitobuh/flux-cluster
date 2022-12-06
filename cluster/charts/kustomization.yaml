@@ -20,3 +20,4 @@ resources:
   - stakater-charts.yaml
   - prometheus-community-charts.yaml
   - rook-ceph-charts.yaml
+  - nvidia-device-plugin.yaml
