@@ -97,8 +97,6 @@ spec:
             - matchExpressions:
                 - key: nvidia.com/gpu
                   operator: Exists
-                  values:
-                    - "true"
     resources:
       requests:
         nvidia.com/gpu: 1 # requesting 1 GPU
