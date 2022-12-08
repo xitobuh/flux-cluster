@@ -95,8 +95,11 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
             - matchExpressions:
-                - key: nvidia.com/gpu
-                  operator: Exists
+                - key: feature.node.kubernetes.io/custom-nvidia-gpu
+                  operator: In
+                  values:
+                    - "true"
+    runtimeClass: nvidia
     resources:
       requests:
         nvidia.com/gpu: 1 # requesting 1 GPU
