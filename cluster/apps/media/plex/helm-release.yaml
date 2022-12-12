@@ -36,6 +36,8 @@ spec:
       tag: 1.29.2.6364-6d72b0cf6@sha256:3457eeeba1c1c698470aa20d23db37c38969581ff86b111c2f31625886dbc948
     env:
       TZ: "${TIMEZONE}"
+      ADVERTISE_IP: "http://${SVC_PLEX_ADDR}:32400/"
+      ALLOWED_NETWORKS: "10.0.0.0/8,172.16.0.0/16,192.168.0.0/16"
     service:
       main:
         type: LoadBalancer
